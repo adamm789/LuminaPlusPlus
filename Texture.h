@@ -1,8 +1,9 @@
 #pragma once
+#include <string>
+
 class Texture
 {
 public:
-    ~Texture();
 	enum class Usage {
         Catchlight,
         Diffuse,
@@ -14,5 +15,8 @@ public:
         Wave,
         Whitecap,
 	};
+
+    Usage TextureUsageSimple;
+    std::string TexturePath;
 };
 

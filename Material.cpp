@@ -10,7 +10,3 @@ Material::Material(Model* parent, std::string path, int variantId) {
 	MaterialPath = path;
 	VariantId = variantId;
 }
-
-Material::~Material() {
-
-}
