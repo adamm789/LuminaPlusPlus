@@ -2,10 +2,6 @@
 #include "Material.h"
 #include <list>
 
-Model::Model() {
-
-}
-
 Model::Model(MdlFile* mdlFile, Model::ModelLod lod, int variantId) {
 	File = mdlFile;
 	Lod = lod;
@@ -14,6 +10,7 @@ Model::Model(MdlFile* mdlFile, Model::ModelLod lod, int variantId) {
 	ReadStrings();
 	ReadMaterials();
 	ReadMeshes();
+	ReadShapes();
 }
 
 void Model::BuildModel() {
@@ -38,14 +35,12 @@ void Model::ReadStrings() {
 }
 
 void Model::ReadMaterials() {
-	//Materials = new Material*[File->FileHeader.MaterialCount];
-	Materials = std::vector<Material>();
 	for (int i = 0; i < File->FileHeader.MaterialCount; i++) {
 		int pathOffset = File->MaterialNameOffsets[i];
 		std::string path = StringOffsetToStringMap[pathOffset];
 		std::vector<Material>::iterator it = Materials.begin();
 
-		Materials.insert(it, i + 1, Material(this, path, VariantId));
+		Materials.push_back(Material(this, path, VariantId));
 	}
 }
 
@@ -84,14 +79,15 @@ void Model::ReadMeshes() {
 		}
 	}
 
-	Meshes = std::vector<Mesh>();
-	for (int i = 0; i < totalMeshes;  i++) {
-		std::vector<Mesh>::iterator it = Meshes.begin();
-		Meshes.insert(it, i + 1, Mesh(this, i, GetMeshTypes(i)));
+	for (int i = 0; i < totalMeshes; i++) {
+		//std::vector<Mesh>::iterator it = Meshes.begin();
+		//Meshes.insert(it, i + 1, Mesh(this, i, GetMeshTypes(i)));
+		Mesh m = Mesh(this, i, GetMeshTypes(i));
+		Meshes.push_back(m);
 	}
 }
-std::list<Mesh::MeshType> Model::GetMeshTypes(int index) {
-	std::list<Mesh::MeshType> types;
+std::vector<Mesh::MeshType> Model::GetMeshTypes(int index) {
+	std::vector<Mesh::MeshType> types;
 
 	if (index >= File->Lods[(int)Lod].MeshIndex &&
 		index < File->Lods[(int)Lod].MeshIndex + File->Lods[(int)Lod].MeshCount &&
@@ -134,4 +130,43 @@ std::list<Mesh::MeshType> Model::GetMeshTypes(int index) {
 		types.push_back(Mesh::MeshType::CrestChange);
 
 	return types;
+}
+
+void Model::ReadShapes() {
+	for (int i = 0; i < File->ModelHeader.ShapeCount; i++) {
+		std::string shapeName = StringOffsetToStringMap[File->Shapes[i].StringOffset];
+		Shape s = Shape(shapeName, File->Shapes[i].ShapeMeshStartIndex, File->Shapes[i].ShapeMeshCount);
+
+		MdlStructs::ShapeStruct shapeStruct = File->Shapes[i];
+
+		// Get the ShapeMeshStruct for this Lod
+		uint16_t lowestIndex = UINT_MAX;
+		if (shapeStruct.ShapeMeshCount[(int)Lod] > 0) {
+			MdlStructs::ShapeMeshStruct shapeMeshStruct = File->ShapeMeshes[(int)shapeStruct.ShapeMeshStartIndex[(int)Lod]];
+			// startIndex in Indices
+			// in File->ShapeValues, start at ShapeMeshStruct::ShapeValueOffset and read ShapeMeshStruct::ShapeValueCount number of ShapeValues (?)
+			// which gives us a ShapeValueStruct
+			// ShapeValueStruct::Offset triangle index should now point to ShapeValueStruct::Value instead
+
+			for (int k = 0; k < shapeMeshStruct.ShapeValueCount; k++) {
+				MdlStructs::ShapeValueStruct svs = File->ShapeValues[k];
+				s.ShapeValueStructs.push_back(svs);
+				if (svs.Offset < lowestIndex) {
+					lowestIndex = svs.Offset;
+				}
+			}
+		}
+
+		s.ShapeValuesStartIndex = lowestIndex;
+		Shapes.emplace(shapeName, s);
+	}
+
+	std::map<std::string, Shape>::iterator it;
+	for (it = Shapes.begin(); it != Shapes.end(); it++) {
+		Shape s = it->second;
+		for (int i = 0; i < Meshes.size(); i++) {
+			Meshes[i].AddShape(s);
+		}
+	}
+	int x = 0;
 }

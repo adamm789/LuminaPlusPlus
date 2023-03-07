@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <array>
 
-Mesh::Mesh(Model* parent, int index, std::list<Mesh::MeshType> types)
+Mesh::Mesh(Model* parent, int index, std::vector<Mesh::MeshType> types)
 {
 	Parent = parent;
 	MeshIndex = index;
@@ -14,6 +14,11 @@ Mesh::Mesh(Model* parent, int index, std::list<Mesh::MeshType> types)
 	BuildMesh();
 }
 
+Mesh::~Mesh() {
+
+}
+
+
 void Mesh::BuildMesh() {
 	ReadBoneTable();
 	ReadIndices();
@@ -21,7 +26,7 @@ void Mesh::BuildMesh() {
 	ReadSubmeshes();
 
 	int matIndex = Parent->File->Meshes[MeshIndex].MaterialIndex;
-	Material = Parent->Materials[matIndex];
+	Material = &Parent->Materials[matIndex];
 }
 
 void Mesh::ReadBoneTable() {
@@ -39,11 +44,11 @@ void Mesh::ReadIndices() {
 	int count = currentMesh.IndexCount;
 
 	for (int i = 0; i < count; i++) {
-		unsigned char byte1 = Parent->File->Data[offset + (i * 2)];
-		unsigned char byte2 = Parent->File->Data[offset + (i * 2) + 1];
+		//unsigned char byte1 = Parent->File->Data[offset + (i * 2)];
+		//unsigned char byte2 = Parent->File->Data[offset + (i * 2) + 1];
 
 		//unsigned short number = byte1 + (byte2 << 8);
-		unsigned short number;
+		uint16_t number;
 		memcpy(&number, &Parent->File->Data[offset + (i * 2)], sizeof(number));
 		Indices.push_back(number);
 	}
@@ -67,10 +72,10 @@ bool ValidVertexElement(const MdlStructs::VertexElement v) {
 		return false;
 	}
 	switch ((Vertex::VertexUsage)v.Usage) {
-	case Vertex::VertexUsage::Normal:
-	case Vertex::VertexUsage::BlendIndices:
 	case Vertex::VertexUsage::Position:
 	case Vertex::VertexUsage::BlendWeights:
+	case Vertex::VertexUsage::BlendIndices:
+	case Vertex::VertexUsage::Normal:
 	case Vertex::VertexUsage::UV:
 	case Vertex::VertexUsage::Tangent2:
 	case Vertex::VertexUsage::Tangent1:
@@ -101,9 +106,7 @@ void Mesh::ReadVertices() {
 
 		for (int j = 0; j < orderedElements.size(); j++) {
 			MdlStructs::VertexElement element = orderedElements[j];
-			if ((Vertex::VertexUsage)element.Usage == Vertex::VertexUsage::Position) {
-				int x = 0;
-			}
+
 			int stream = element.Stream;
 			int bytesRead = SetElementField(&Vertices[i], element, Parent->File->Data, offsets[stream]);
 			if (bytesRead == 0) {
@@ -155,7 +158,7 @@ int Mesh::SetElementField(Vertex* v, MdlStructs::VertexElement element, char* ar
 	case Vertex::VertexType::ByteFloat4:
 		//Vector4
 		for (int i = 0; i < 4; i++) {
-			data[i] = (float)((arr[offset + i]) / 255);
+			data[i] = (unsigned char)(arr[offset + i]) / (float)255;
 		}
 		break;
 	case Vertex::VertexType::Half2:
@@ -192,7 +195,7 @@ int Mesh::SetElementField(Vertex* v, MdlStructs::VertexElement element, char* ar
 		break;
 	case Vertex::VertexUsage::BlendIndices:
 		for (int i = 0; i < 4; i++) {
-			v->BlendIndices[i] = (char)data[i];
+			v->BlendIndices[i] = (int8_t)data[i];
 		}
 		break;
 	case Vertex::VertexUsage::Normal: 
@@ -245,8 +248,28 @@ int Mesh::SetElementField(Vertex* v, MdlStructs::VertexElement element, char* ar
 void Mesh::ReadSubmeshes() {
 	MdlStructs::MeshStruct currentMesh = Parent->File->Meshes[MeshIndex];
 
+	uint16_t indexStart = UINT_MAX;
+	uint16_t indexEnd = 0;
 	for (int i = 0; i < currentMesh.SubMeshCount; i++) {
-		Submeshes.push_back(Submesh(Parent, MeshIndex, i));
+		Submesh s = Submesh(Parent, MeshIndex, i);
+		Submeshes.push_back(s);
+
+		if (s.IndexOffset < indexStart) {
+			indexStart = s.IndexOffset;
+		}
+		if (s.IndexNum + s.IndexOffset > indexEnd) {
+			indexEnd = s.IndexNum + s.IndexOffset;
+		}
 	}
 }
 
+void Mesh::AddShape(Shape s) {
+
+	bool added = false;
+	for (int i = 0; i < Submeshes.size(); i++) {
+		added = Submeshes[i].AddShape(s) || added;
+	}
+	if (added) {
+		Shapes.push_back(s);
+	}
+}
