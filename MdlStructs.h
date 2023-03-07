@@ -6,29 +6,29 @@ public:
 	struct ModelFileHeader
 	{
 	public:
-		unsigned int Version;
-		unsigned int StackSize;
-		unsigned int RuntimeSize;
-		unsigned short VertexDeclarationCount;
-		unsigned short MaterialCount;
-		unsigned int VertexOffset[3];
-		unsigned int IndexOffset[3];
-		unsigned int VertexBufferSize[3];
-		unsigned int IndexBufferSize[3];
-		__int8 LodCount;
+		uint32_t Version;
+		uint32_t StackSize;
+		uint32_t RuntimeSize;
+		uint16_t VertexDeclarationCount;
+		uint16_t MaterialCount;
+		uint32_t VertexOffset[3];
+		uint32_t IndexOffset[3];
+		uint32_t VertexBufferSize[3];
+		uint32_t IndexBufferSize[3];
+		uint8_t LodCount;
 		bool EnableIndexBufferStreaming;
 		bool EnableEdgeGeometry;
-		__int8 Padding;
+		uint8_t Padding;
 	};
 
 	struct VertexElement {
 	public:
-		__int8 Stream;
-		__int8 Offset;
-		__int8 Type;
-		__int8 Usage;
-		__int8 UsageIndex;
-		__int8 Padding[3];
+		uint8_t Stream;
+		uint8_t Offset;
+		uint8_t Type;
+		uint8_t Usage;
+		uint8_t UsageIndex;
+		uint8_t Padding[3];
 	};
 
 	struct VertexDeclarationStruct {
@@ -39,17 +39,18 @@ public:
 	struct ModelHeader {
 	public:
 		float Radius;
-		unsigned short MeshCount;
-		unsigned short AttributeCount;
-		unsigned short SubmeshCount;
-		unsigned short MaterialCount;
-		unsigned short BoneCount;
-		unsigned short BoneTableCount;
-		unsigned short ShapeCount;
-		unsigned short ShapeMeshCount;
-		unsigned short ShapeValueCount;
-		__int8 LodCount;
-		__int8 Flags1;
+		uint16_t MeshCount;
+		uint16_t AttributeCount;
+		uint16_t SubmeshCount;
+		uint16_t MaterialCount;
+		uint16_t BoneCount;
+		uint16_t BoneTableCount;
+		uint16_t ShapeCount;
+		uint16_t ShapeMeshCount;
+		uint16_t ShapeValueCount;
+		uint8_t LodCount;
+
+		uint8_t Flags1;
 
 		//bool DustOcclusionEnabled = (Flags1 << 0x80) > 0;
 		//bool SnowOcclusionEnabled = (Flags1 << 0x40) > 0;
@@ -60,10 +61,10 @@ public:
 		//bool LightShadowDisabled = (Flags1 << 0x02) > 0;
 		//bool ShadowDisabled = (Flags1 << 0x01) > 0;
 
-		unsigned short ElementIdCount;
-		__int8 TerrainShadowMeshCount;
+		uint16_t ElementIdCount;
+		uint8_t TerrainShadowMeshCount;
 
-		__int8 Flags2;
+		uint8_t Flags2;
 		//bool Unknown2 = (Flags2 << 0x80) > 0;
 		//bool BgUvScrollEnabled = (Flags2 << 0x40) > 0;
 		//bool EnableForceNonResident = (Flags2 << 0x20) > 0;
@@ -75,145 +76,149 @@ public:
 
 		float ModelClipOutDistance;
 		float ShadowClipOutDistance;
-		unsigned short Unknown4;
-		unsigned short TerrainShadowSubmeshCount;
+		uint16_t Unknown4;
+		uint16_t TerrainShadowSubmeshCount;
 
-		__int8 Unknown5;
+		uint8_t Unknown5;
 
-		__int8 BGChangeMaterialIndex;
-		__int8 BGCrestChangeMaterialIndex;
-		__int8 Unknown6;
-		unsigned short Unknown7;
-		unsigned short Unknown8;
-		unsigned short Unknown9;
-		__int8 Padding[6];
+		uint8_t BGChangeMaterialIndex;
+		uint8_t BGCrestChangeMaterialIndex;
+		uint8_t Unknown6;
+		uint16_t Unknown7;
+		uint16_t Unknown8;
+		uint16_t Unknown9;
+		uint8_t Padding[6];
 	};
 	struct ElementIdStruct {
 	public:
-		unsigned int ElementId;
-		unsigned int ParentBoneName;
+		uint32_t ElementId;
+		uint32_t ParentBoneName;
 		float Translate[3];
 		float Rotate[3];
 	};
 
 	struct LodStruct {
 	public:
-		unsigned short MeshIndex;
-		unsigned short MeshCount;
+		uint16_t MeshIndex;
+		uint16_t MeshCount;
 		float ModelLodRange;
 		float TextureLodRange;
-		unsigned short WaterMeshIndex;
-		unsigned short WaterMeshCount;
-		unsigned short ShadowMeshIndex;
-		unsigned short ShadowMeshCount;
-		unsigned short TerrainShadowMeshIndex;
-		unsigned short TerrainShadowMeshCount;
-		unsigned short VerticalFogMeshIndex;
-		unsigned short VerticalFogMeshCount;
+		uint16_t WaterMeshIndex;
+		uint16_t WaterMeshCount;
+		uint16_t ShadowMeshIndex;
+		uint16_t ShadowMeshCount;
+		uint16_t TerrainShadowMeshIndex;
+		uint16_t TerrainShadowMeshCount;
+		uint16_t VerticalFogMeshIndex;
+		uint16_t VerticalFogMeshCount;
 
-		unsigned int EdgeGeometrySize;
-		unsigned int EdgeGeometryDataOffset;
-		unsigned int PolygonCount;
-		unsigned int Unknown1;
-		unsigned int VertexBufferSize;
-		unsigned int IndexBufferSize;
-		unsigned int VertexDataOffset;
-		unsigned int IndexDataOffset;
+		uint32_t EdgeGeometrySize;
+		uint32_t EdgeGeometryDataOffset;
+		uint32_t PolygonCount;
+		uint32_t Unknown1;
+		uint32_t VertexBufferSize;
+		uint32_t IndexBufferSize;
+		uint32_t VertexDataOffset;
+		uint32_t IndexDataOffset;
 	};
 
 	struct ExtraLodStruct {
 	public:
-		unsigned short LightShaftMeshIndex;
-		unsigned short LightShaftMeshCount;
-		unsigned short GlassMeshIndex;
-		unsigned short GlassMeshCount;
-		unsigned short MaterialChangeMeshIndex;
-		unsigned short MaterialChangeMeshCount;
-		unsigned short CrestChangeMeshIndex;
-		unsigned short CrestChangeMeshCount;
-		unsigned short Unknown1;
-		unsigned short Unknown2;
-		unsigned short Unknown3;
-		unsigned short Unknown4;
-		unsigned short Unknown5;
-		unsigned short Unknown6;
-		unsigned short Unknown7;
-		unsigned short Unknown8;
-		unsigned short Unknown9;
-		unsigned short Unknown10;
-		unsigned short Unknown11;
-		unsigned short Unknown12;
+		uint16_t LightShaftMeshIndex;
+		uint16_t LightShaftMeshCount;
+		uint16_t GlassMeshIndex;
+		uint16_t GlassMeshCount;
+		uint16_t MaterialChangeMeshIndex;
+		uint16_t MaterialChangeMeshCount;
+		uint16_t CrestChangeMeshIndex;
+		uint16_t CrestChangeMeshCount;
+		uint16_t Unknown1;
+		uint16_t Unknown2;
+		uint16_t Unknown3;
+		uint16_t Unknown4;
+		uint16_t Unknown5;
+		uint16_t Unknown6;
+		uint16_t Unknown7;
+		uint16_t Unknown8;
+		uint16_t Unknown9;
+		uint16_t Unknown10;
+		uint16_t Unknown11;
+		uint16_t Unknown12;
 	};
 
 	struct MeshStruct {
 	public:
-		unsigned short VertexCount;
-		unsigned short Padding;
-		unsigned int IndexCount;
-		unsigned short MaterialIndex;
-		unsigned short SubMeshIndex;
-		unsigned short SubMeshCount;
-		unsigned short BoneTableIndex;
-		unsigned int StartIndex;
-		unsigned int VertexBufferOffset[3];
-		__int8 VertexBufferStride[3];
-		__int8 VertexStreamCount;
+		uint16_t VertexCount;
+		uint16_t Padding;
+		uint32_t IndexCount;
+		uint16_t MaterialIndex;
+		uint16_t SubMeshIndex;
+		uint16_t SubMeshCount;
+		uint16_t BoneTableIndex;
+		uint32_t StartIndex;
+		uint32_t VertexBufferOffset[3];
+		uint8_t VertexBufferStride[3];
+		uint8_t VertexStreamCount;
 	};
 
 	struct TerrainShadowMeshStruct {
 	public:
-		unsigned int IndexCount;
-		unsigned int StartIndex;
-		unsigned int VertexBufferOffset;
-		unsigned short VertexCount;
-		unsigned short SubMeshIndex;
-		unsigned short SubMeshCount;
-		__int8 VertexBufferStride;
-		__int8 Padding;
+		uint32_t IndexCount;
+		uint32_t StartIndex;
+		uint32_t VertexBufferOffset;
+		uint16_t VertexCount;
+		uint16_t SubMeshIndex;
+		uint16_t SubMeshCount;
+		uint8_t VertexBufferStride;
+		uint8_t Padding;
 	};
 
 	struct SubmeshStruct {
 	public:
-		__int32 IndexOffset;
-		__int32 IndexCount;
-		__int32 AttributeIndexMask;
-		unsigned short BoneStartIndex;
-		unsigned short BoneCount;
+		uint32_t IndexOffset;
+		uint32_t IndexCount;
+		uint32_t AttributeIndexMask;
+		uint16_t BoneStartIndex;
+		uint16_t BoneCount;
 	};
 
 	struct TerrainShadowSubmeshStruct {
 	public:
-		unsigned int IndexOffset;
-		unsigned int IndexCount;
-		unsigned short Unknown1;
-		unsigned short Unknown2;
+		uint32_t IndexOffset;
+		uint32_t IndexCount;
+		uint16_t Unknown1;
+		uint16_t Unknown2;
 	};
 
 	struct BoneTableStruct {
 	public:
-		unsigned short BoneIndex[64];
-		__int8 BoneCount;
-		__int8 Padding[3];
+		uint16_t BoneIndex[64];
+		uint8_t BoneCount = 0;
+		uint8_t Padding[3];
 	};
 
 	struct ShapeStruct {
 	public:
-		unsigned int StringOffset;
-		unsigned short ShapeMeshStartIndex[3];
-		unsigned short ShapeMeshCount[3];
+		uint32_t StringOffset;
+		uint16_t ShapeMeshStartIndex[3];
+		uint16_t ShapeMeshCount[3];
 	};
 
 	struct ShapeMeshStruct {
 	public:
-		unsigned int StartIndex;
-		unsigned int ShapeValueCount;
-		unsigned int ShapeValueOffset;
+		// ShapeData.ShapePart
+		uint32_t StartIndex;	// offset to the index block this Shape Data should be replacing
+			//StartIndex = MeshNumber?
+
+		uint32_t ShapeValueCount;	// # of triangle indices to replace
+		uint32_t ShapeValueOffset;	// the offset where this part should start reading in the Shape Data list
 	};
 
 	struct ShapeValueStruct {
 	public:
-		unsigned short Offset;
-		unsigned short Value;
+		// ShapeData.ShapeDataEntry
+		uint16_t Offset;	// Base Triangle Index we're replacing
+		uint16_t Value;	// The vertex that Triangle Index should now point to instead
 	};
 
 	struct BoundingBoxStruct {

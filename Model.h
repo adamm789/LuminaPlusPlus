@@ -16,7 +16,6 @@ public:
 		High, Med, Low
 	};
 
-	Model();
 	Model(MdlFile* mdlFile, ModelLod lod = Model::ModelLod::High, int variantId = 1);
 
 	MdlFile* File;
@@ -31,6 +30,7 @@ private:
 	void ReadStrings();
 	void ReadMaterials();
 	void ReadMeshes();
-	std::list<Mesh::MeshType> GetMeshTypes(int index);
+	void ReadShapes();
+	std::vector<Mesh::MeshType> GetMeshTypes(int index);
 };
 

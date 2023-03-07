@@ -9,14 +9,14 @@ class MdlFile
 {
 public:
 	MdlFile();
-	MdlFile(std::string filePath);
-	~MdlFile();
+	MdlFile(const char* filePath);
+	void Destroy();
 
 	char* Data;
 
 	MdlStructs::ModelFileHeader FileHeader;
 	MdlStructs::VertexDeclarationStruct* VertexDeclarations;
-	unsigned short StringCount;
+	uint16_t StringCount;
 	char* Strings;
 
 	MdlStructs::ModelHeader ModelHeader;
@@ -25,21 +25,21 @@ public:
 	MdlStructs::ExtraLodStruct ExtraLods[3];
 	MdlStructs::MeshStruct* Meshes;
 
-	unsigned int* AttributeNameOffsets;
+	uint32_t* AttributeNameOffsets;
 
 	MdlStructs::TerrainShadowMeshStruct* TerrainShadowMeshes;
 	MdlStructs::SubmeshStruct* Submeshes;
 	MdlStructs::TerrainShadowSubmeshStruct* TerrainShadowSubmeshes;
 
-	unsigned int* MaterialNameOffsets;
-	unsigned int* BoneNameOffsets;
+	uint32_t* MaterialNameOffsets;
+	uint32_t* BoneNameOffsets;
 	MdlStructs::BoneTableStruct* BoneTables;
 
 	MdlStructs::ShapeStruct* Shapes;
 	MdlStructs::ShapeMeshStruct* ShapeMeshes;
 	MdlStructs::ShapeValueStruct* ShapeValues;
 
-	unsigned short* SubmeshBoneMap;
+	uint16_t* SubmeshBoneMap;
 
 	MdlStructs::BoundingBoxStruct BoundingBoxes;
 	MdlStructs::BoundingBoxStruct ModelBoundingBoxes;
@@ -47,6 +47,6 @@ public:
 	MdlStructs::BoundingBoxStruct VerticalFogBoundingBoxes;
 	MdlStructs::BoundingBoxStruct* BoneBoundingBoxes;
 
-	unsigned int StringSize;
+	uint32_t StringSize;
 	bool ExtraLodEnabled;
 };

@@ -1,4 +1,5 @@
 #pragma once
+#include "Shape.h"
 #include <string>
 #include <vector>
 
@@ -6,11 +7,15 @@ class Model;
 class Submesh
 {
 public:
-	unsigned int IndexOffset;
-	unsigned int IndexNum;
+	Submesh(Model* model, int meshIndex, int subMeshIndex);
+
+	uint32_t IndexOffset;
+	uint32_t IndexNum;
 	std::vector<std::string> Attributes;
 	std::vector<std::string> Bones;
 
-	Submesh(Model* model, int meshIndex, int subMeshIndex);
+	std::vector<Shape> Shapes;
+
+	bool AddShape(Shape s);
 };
 

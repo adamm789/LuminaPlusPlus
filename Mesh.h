@@ -3,6 +3,7 @@
 #include "Submesh.h"
 #include "Vertex.h"
 #include "MdlStructs.h"
+#include "Shape.h"
 
 #include <string>
 #include <list>
@@ -23,18 +24,21 @@ public:
 		CrestChange
 	};
 
-	Mesh(Model* parent, int index, std::list<Mesh::MeshType> types);
+	Mesh(Model* parent, int index, std::vector<Mesh::MeshType> types);
+	~Mesh();
 
 	Model* Parent;
 	int MeshIndex;
-	std::list<Mesh::MeshType> Types;
-	std::string* Attributes;
+	std::vector<Mesh::MeshType> Types;
+	std::vector<std::string> Attributes;
 	std::vector<Submesh> Submeshes;
-	unsigned short* BoneTable;
+	uint16_t* BoneTable;
 	std::vector<Vertex> Vertices;
-	std::vector<unsigned short> Indices;
-	Material Material;
+	std::vector<uint16_t> Indices;
+	Material* Material;
 
+	std::vector<Shape> Shapes;
+	void AddShape(Shape s);
 
 private:
 	void BuildMesh();
