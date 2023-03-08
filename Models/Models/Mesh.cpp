@@ -1,6 +1,6 @@
 #include "Mesh.h"
 #include "Model.h"
-#include "MdlStructs.h"
+#include "../../Data/Parsing/MdlStructs.h"
 
 #include <algorithm>
 #include <array>
@@ -153,6 +153,9 @@ int Mesh::SetElementField(Vertex* v, MdlStructs::VertexElement element, char* ar
 		//Vector4
 		for (int i = 0; i < 4; i++) {
 			data[i] = (unsigned char)arr[offset + i];
+			if (data[i] > 3) {
+				int x = 0;
+			}
 		}
 		break;
 	case Vertex::VertexType::ByteFloat4:
@@ -195,7 +198,7 @@ int Mesh::SetElementField(Vertex* v, MdlStructs::VertexElement element, char* ar
 		break;
 	case Vertex::VertexUsage::BlendIndices:
 		for (int i = 0; i < 4; i++) {
-			v->BlendIndices[i] = (int8_t)data[i];
+			v->BlendIndices[i] = (uint8_t)data[i];
 		}
 		break;
 	case Vertex::VertexUsage::Normal: 

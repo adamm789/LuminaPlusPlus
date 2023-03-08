@@ -1,5 +1,5 @@
 #pragma once
-#include "MdlStructs.h"
+#include "../../Data/Parsing/MdlStructs.h"
 #include <string>
 #include <vector>
 #include <map>

@@ -3,7 +3,7 @@
 #include <fstream>
 
 #include <string.h>
-#include "MdlStructs.h"
+#include "../Parsing/MdlStructs.h"
 
 class MdlFile
 {

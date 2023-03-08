@@ -9,14 +9,10 @@ MdlFile::MdlFile() {}
 
 MdlFile::MdlFile(const char* filePath) {
 	std::ifstream ifs;
-	std::cout << filePath << std::endl;
 	ifs.open(filePath, std::ios::in | std::ios::binary);
 
 	ifs.seekg(0, std::ios::end);
 	long length = ifs.tellg();
-
-	std::cout << "Data length: ";
-	std::cout << length << std::endl;
 
 	if (!ifs.good()) {
 		std::cout << "input stream was not good" << std::endl;

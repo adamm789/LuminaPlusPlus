@@ -1,5 +1,5 @@
 #include "Model.h"
-#include "Material.h"
+#include "../Materials/Material.h"
 #include <list>
 
 Model::Model(MdlFile* mdlFile, Model::ModelLod lod, int variantId) {

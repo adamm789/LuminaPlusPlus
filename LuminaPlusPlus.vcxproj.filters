@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Models">
+      <UniqueIdentifier>{66a3bf3f-459c-489a-b442-835f707c4f86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models\Models">
+      <UniqueIdentifier>{b56db741-1983-42b9-bda0-559fdf1fec50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models\Materials">
+      <UniqueIdentifier>{86db3f43-2d94-45d2-a670-9b8a6c3657be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{fecb54f8-3f84-411d-8e2a-6d2e76cb099d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Parsing">
+      <UniqueIdentifier>{c9d76ce9-7728-4e9b-b4bf-d5af06fa31bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Files">
+      <UniqueIdentifier>{aec633b3-f6ca-4833-ba2e-151b069e0a20}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Data\Files\MdlFile.cpp">
+      <Filter>Data\Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\Parsing\MdlStructs.cpp">
+      <Filter>Data\Parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\Files\MtrlFile.cpp">
+      <Filter>Data\Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Materials\Material.cpp">
+      <Filter>Models\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Models\Mesh.cpp">
+      <Filter>Models\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Models\Shape.cpp">
+      <Filter>Models\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Models\Submesh.cpp">
+      <Filter>Models\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Models\Vertex.cpp">
+      <Filter>Models\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Materials\Texture.cpp">
+      <Filter>Models\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Models\Model.cpp">
+      <Filter>Models\Models</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Data\Files\MdlFile.h">
+      <Filter>Data\Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Parsing\MdlStructs.h">
+      <Filter>Data\Parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Files\MtrlFile.h">
+      <Filter>Data\Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Materials\Material.h">
+      <Filter>Models\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Models\Mesh.h">
+      <Filter>Models\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Models\Model.h">
+      <Filter>Models\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Models\Shape.h">
+      <Filter>Models\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Models\Submesh.h">
+      <Filter>Models\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Models\Vertex.h">
+      <Filter>Models\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Materials\Texture.h">
+      <Filter>Models\Materials</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -25,7 +25,6 @@ Submesh::Submesh(Model* model, int meshIndex, int subMeshIndex) {
 		uint16_t boneIndex = model->File->SubmeshBoneMap[i];
 		if (boneIndex < 0 || boneIndex >= model->File->ModelHeader.BoneCount) {
 			// I don't know why, but it seems like we're trying to get boneIndices that are out of range?
-			fprintf(stdout, "boneIndex: %hu out of range; skipping\n", boneIndex);
 			continue;
 		}
 		uint32_t boneOffset = model->File->BoneNameOffsets[boneIndex];

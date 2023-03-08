@@ -1,8 +1,8 @@
 #pragma once
-#include "Material.h"
+#include "../Materials/Material.h"
 #include "Submesh.h"
 #include "Vertex.h"
-#include "MdlStructs.h"
+#include "../../Data/Parsing/MdlStructs.h"
 #include "Shape.h"
 
 #include <string>

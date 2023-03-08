@@ -23,7 +23,7 @@ public:
 	};
 	float Position[4];
 	float BlendWeights[4];
-	char BlendIndices[4];
+	uint8_t BlendIndices[4];
 	float Normal[3];
 	float UV[4];
 	float Color[4];

@@ -1,6 +1,6 @@
 #pragma once
-#include "MdlFile.h"
-#include "Material.h"
+#include "../../Data/Files/MdlFile.h"
+#include "../Materials/Material.h"
 #include "Mesh.h"
 #include "Shape.h"
 
