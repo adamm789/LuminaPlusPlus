@@ -17,7 +17,9 @@ public:
 	};
 
 	Model(MdlFile* mdlFile, ModelLod lod = Model::ModelLod::High, int variantId = 1);
+	~Model();
 
+	// TODO: Change to weak_ptr? shared_ptr?
 	MdlFile* File;
 	ModelLod Lod;
 	std::vector<Mesh> Meshes;

@@ -21,12 +21,19 @@ Submesh::Submesh(Model* model, int meshIndex, int subMeshIndex) {
 
 	if (currentSubMesh->BoneStartIndex == 65535) return;
 	int boneEndIndex = currentSubMesh->BoneStartIndex + currentSubMesh->BoneCount;
+	if (boneEndIndex > model->File->SubmeshBoneMap.size()) {
+		boneEndIndex = model->File->SubmeshBoneMap.size();
+	}
 	for (int i = currentSubMesh->BoneStartIndex; i < boneEndIndex; i++) {
+		if (i > model->File->SubmeshBoneMap.size()) continue;
+
 		uint16_t boneIndex = model->File->SubmeshBoneMap[i];
+		/*
 		if (boneIndex < 0 || boneIndex >= model->File->ModelHeader.BoneCount) {
 			// I don't know why, but it seems like we're trying to get boneIndices that are out of range?
 			continue;
 		}
+		*/
 		uint32_t boneOffset = model->File->BoneNameOffsets[boneIndex];
 		std::string boneName = model->StringOffsetToStringMap[(int)boneOffset];
 		Bones.push_back(boneName);

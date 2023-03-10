@@ -1,52 +1,54 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <vector>
 
-#include <string.h>
+#include <string>
 #include "../Parsing/MdlStructs.h"
 
 class MdlFile
 {
 public:
-	MdlFile();
-	MdlFile(const char* filePath);
-	void Destroy();
+	static MdlFile* LoadFromFile2(std::string filePath);
+	~MdlFile();
+	void LoadFromFile(std::string filePath);
 
 	char* Data;
 
 	MdlStructs::ModelFileHeader FileHeader;
-	MdlStructs::VertexDeclarationStruct* VertexDeclarations;
+	std::vector<MdlStructs::VertexDeclarationStruct> VertexDeclarations;
 	uint16_t StringCount;
 	char* Strings;
 
 	MdlStructs::ModelHeader ModelHeader;
-	MdlStructs::ElementIdStruct* ElementIds;
+	std::vector<MdlStructs::ElementIdStruct> ElementIds;
 	MdlStructs::LodStruct Lods[3];
 	MdlStructs::ExtraLodStruct ExtraLods[3];
-	MdlStructs::MeshStruct* Meshes;
+	std::vector<MdlStructs::MeshStruct> Meshes;
 
-	uint32_t* AttributeNameOffsets;
+	std::vector<uint32_t> AttributeNameOffsets;
 
-	MdlStructs::TerrainShadowMeshStruct* TerrainShadowMeshes;
-	MdlStructs::SubmeshStruct* Submeshes;
-	MdlStructs::TerrainShadowSubmeshStruct* TerrainShadowSubmeshes;
+	std::vector<MdlStructs::TerrainShadowMeshStruct> TerrainShadowMeshes;
+	std::vector<MdlStructs::SubmeshStruct> Submeshes;
+	std::vector<MdlStructs::TerrainShadowSubmeshStruct> TerrainShadowSubmeshes;
 
-	uint32_t* MaterialNameOffsets;
-	uint32_t* BoneNameOffsets;
-	MdlStructs::BoneTableStruct* BoneTables;
+	std::vector<uint32_t> MaterialNameOffsets;
+	std::vector<uint32_t> BoneNameOffsets;
+	std::vector<MdlStructs::BoneTableStruct> BoneTables;
 
-	MdlStructs::ShapeStruct* Shapes;
-	MdlStructs::ShapeMeshStruct* ShapeMeshes;
-	MdlStructs::ShapeValueStruct* ShapeValues;
+	std::vector<MdlStructs::ShapeStruct> Shapes;
+	std::vector<MdlStructs::ShapeMeshStruct> ShapeMeshes;
+	std::vector<MdlStructs::ShapeValueStruct> ShapeValues;
 
-	uint16_t* SubmeshBoneMap;
+	std::vector<uint16_t> SubmeshBoneMap;
 
 	MdlStructs::BoundingBoxStruct BoundingBoxes;
 	MdlStructs::BoundingBoxStruct ModelBoundingBoxes;
 	MdlStructs::BoundingBoxStruct WaterBoundingBoxes;
 	MdlStructs::BoundingBoxStruct VerticalFogBoundingBoxes;
-	MdlStructs::BoundingBoxStruct* BoneBoundingBoxes;
+	std::vector<MdlStructs::BoundingBoxStruct> BoneBoundingBoxes;
 
 	uint32_t StringSize;
 	bool ExtraLodEnabled;
+	bool HasLoaded = false;
 };

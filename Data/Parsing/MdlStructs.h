@@ -5,7 +5,6 @@ static class MdlStructs
 public:
 	struct ModelFileHeader
 	{
-	public:
 		uint32_t Version;
 		uint32_t StackSize;
 		uint32_t RuntimeSize;
@@ -22,7 +21,6 @@ public:
 	};
 
 	struct VertexElement {
-	public:
 		uint8_t Stream;
 		uint8_t Offset;
 		uint8_t Type;
@@ -32,12 +30,10 @@ public:
 	};
 
 	struct VertexDeclarationStruct {
-	public:
 		VertexElement VertexElements[17];
 	};
 
 	struct ModelHeader {
-	public:
 		float Radius;
 		uint16_t MeshCount;
 		uint16_t AttributeCount;
@@ -65,6 +61,7 @@ public:
 		uint8_t TerrainShadowMeshCount;
 
 		uint8_t Flags2;
+
 		//bool Unknown2 = (Flags2 << 0x80) > 0;
 		//bool BgUvScrollEnabled = (Flags2 << 0x40) > 0;
 		//bool EnableForceNonResident = (Flags2 << 0x20) > 0;
@@ -89,8 +86,8 @@ public:
 		uint16_t Unknown9;
 		uint8_t Padding[6];
 	};
+
 	struct ElementIdStruct {
-	public:
 		uint32_t ElementId;
 		uint32_t ParentBoneName;
 		float Translate[3];
@@ -98,7 +95,6 @@ public:
 	};
 
 	struct LodStruct {
-	public:
 		uint16_t MeshIndex;
 		uint16_t MeshCount;
 		float ModelLodRange;
@@ -123,7 +119,6 @@ public:
 	};
 
 	struct ExtraLodStruct {
-	public:
 		uint16_t LightShaftMeshIndex;
 		uint16_t LightShaftMeshCount;
 		uint16_t GlassMeshIndex;
@@ -147,7 +142,6 @@ public:
 	};
 
 	struct MeshStruct {
-	public:
 		uint16_t VertexCount;
 		uint16_t Padding;
 		uint32_t IndexCount;
@@ -162,7 +156,6 @@ public:
 	};
 
 	struct TerrainShadowMeshStruct {
-	public:
 		uint32_t IndexCount;
 		uint32_t StartIndex;
 		uint32_t VertexBufferOffset;
@@ -174,7 +167,6 @@ public:
 	};
 
 	struct SubmeshStruct {
-	public:
 		uint32_t IndexOffset;
 		uint32_t IndexCount;
 		uint32_t AttributeIndexMask;
@@ -183,7 +175,6 @@ public:
 	};
 
 	struct TerrainShadowSubmeshStruct {
-	public:
 		uint32_t IndexOffset;
 		uint32_t IndexCount;
 		uint16_t Unknown1;
@@ -191,38 +182,31 @@ public:
 	};
 
 	struct BoneTableStruct {
-	public:
 		uint16_t BoneIndex[64];
 		uint8_t BoneCount = 0;
 		uint8_t Padding[3];
 	};
 
 	struct ShapeStruct {
-	public:
 		uint32_t StringOffset;
 		uint16_t ShapeMeshStartIndex[3];
 		uint16_t ShapeMeshCount[3];
 	};
 
 	struct ShapeMeshStruct {
-	public:
 		// ShapeData.ShapePart
 		uint32_t StartIndex;	// offset to the index block this Shape Data should be replacing
-			//StartIndex = MeshNumber?
-
 		uint32_t ShapeValueCount;	// # of triangle indices to replace
 		uint32_t ShapeValueOffset;	// the offset where this part should start reading in the Shape Data list
 	};
 
 	struct ShapeValueStruct {
-	public:
 		// ShapeData.ShapeDataEntry
 		uint16_t Offset;	// Base Triangle Index we're replacing
 		uint16_t Value;	// The vertex that Triangle Index should now point to instead
 	};
 
 	struct BoundingBoxStruct {
-	public:
 		float Min[4];
 		float Max[4];
 	};

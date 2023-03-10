@@ -13,6 +13,10 @@ Model::Model(MdlFile* mdlFile, Model::ModelLod lod, int variantId) {
 	ReadShapes();
 }
 
+
+Model::~Model() {
+}
+
 void Model::BuildModel() {
 
 }
