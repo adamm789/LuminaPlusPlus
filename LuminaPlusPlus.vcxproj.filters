@@ -51,6 +51,9 @@
     <ClCompile Include="Models\Models\Model.cpp">
       <Filter>Models\Models</Filter>
     </ClCompile>
+    <ClCompile Include="Data\Parsing\MtrlStructs.cpp">
+      <Filter>Data\Parsing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data\Files\MdlFile.h">
@@ -82,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="Models\Materials\Texture.h">
       <Filter>Models\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Parsing\MtrlStructs.h">
+      <Filter>Data\Parsing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

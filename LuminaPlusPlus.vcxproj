@@ -22,6 +22,7 @@
     <ClCompile Include="Data\Files\MdlFile.cpp" />
     <ClCompile Include="Data\Files\MtrlFile.cpp" />
     <ClCompile Include="Data\Parsing\MdlStructs.cpp" />
+    <ClCompile Include="Data\Parsing\MtrlStructs.cpp" />
     <ClCompile Include="Models\Materials\Material.cpp" />
     <ClCompile Include="Models\Materials\Texture.cpp" />
     <ClCompile Include="Models\Models\Mesh.cpp" />
@@ -34,6 +35,7 @@
     <ClInclude Include="Data\Files\MdlFile.h" />
     <ClInclude Include="Data\Files\MtrlFile.h" />
     <ClInclude Include="Data\Parsing\MdlStructs.h" />
+    <ClInclude Include="Data\Parsing\MtrlStructs.h" />
     <ClInclude Include="Models\Materials\Material.h" />
     <ClInclude Include="Models\Materials\Texture.h" />
     <ClInclude Include="Models\Models\Mesh.h" />
@@ -130,6 +132,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
