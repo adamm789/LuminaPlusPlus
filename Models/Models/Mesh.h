@@ -47,6 +47,6 @@ private:
 	void ReadVertices();
 	void ReadSubmeshes();
 
-	int SetElementField(Vertex* v, MdlStructs::VertexElement element, char* arr, int offset);
+	int SetElementField(Vertex* v, MdlStructs::VertexElement element, std::vector<std::byte> arr, int offset);
 };
 

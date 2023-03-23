@@ -129,7 +129,7 @@ void Mesh::ReadVertices() {
 /// <param name="arr"></param>
 /// <param name="offset"></param>
 /// <returns>The number of bytes read</returns>
-int Mesh::SetElementField(Vertex* v, MdlStructs::VertexElement element, char* arr, int offset) {
+int Mesh::SetElementField(Vertex* v, MdlStructs::VertexElement element, std::vector<std::byte> arr, int offset) {
 
 	Vertex::VertexType type = (Vertex::VertexType)element.Type;
 	Vertex::VertexUsage usage = (Vertex::VertexUsage)element.Usage;
@@ -168,17 +168,17 @@ int Mesh::SetElementField(Vertex* v, MdlStructs::VertexElement element, char* ar
 		//Vector2
 		//memcpy(&data[0], &arr[offset], sizeof(__int16));
 		//memcpy(&data[1], &arr[offset + 2], sizeof(__int16));
-		data[0] = arr[offset] + (arr[offset + 1] << 8);
-		data[1] = arr[offset + 2] + (arr[offset + 3] << 8);
+		data[0] = (char)arr[offset] + (char)(arr[offset + 1] << 8);
+		data[1] = (char)arr[offset + 2] + (char)(arr[offset + 3] << 8);
 		data[2] = 0;
 		data[3] = 0;
 		break;
 	case Vertex::VertexType::Half4:
 		//Vector4
-		data[0] = arr[offset] + (arr[offset + 1] << 8);
-		data[1] = arr[offset + 2] + (arr[offset + 3] << 8);
-		data[2] = arr[offset + 4] + (arr[offset + 5] << 8);
-		data[3] = arr[offset + 6] + (arr[offset + 7] << 8);
+		data[0] = (char)arr[offset] + (char)(arr[offset + 1] << 8);
+		data[1] = (char)arr[offset + 2] + (char)(arr[offset + 3] << 8);
+		data[2] = (char)arr[offset + 4] + (char)(arr[offset + 5] << 8);
+		data[3] = (char)arr[offset + 6] + (char)(arr[offset + 7] << 8);
 		break;
 	default:
 		break;
