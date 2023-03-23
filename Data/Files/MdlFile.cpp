@@ -5,6 +5,8 @@
 #include <string.h>
 #include <vector>
 #include <bitset>
+#include "../LuminaBinaryReader.h"
+#include "../../Models/Models/Model.h"
 
 void MdlFile::LoadFromFile(std::string filePath) {
 	std::ifstream ifs;
@@ -20,8 +22,10 @@ void MdlFile::LoadFromFile(std::string filePath) {
 		}
 
 		ifs.seekg(0, std::ios::beg);
-		Data = new char[length];
-		ifs.read(Data, length);
+		//Data = new char[length];
+		//ifs.read(Data, length);
+		Data = std::vector<std::byte>(length);
+		ifs.read((char*) & Data[0], length);
 
 		int pos = 0;
 
@@ -42,8 +46,9 @@ void MdlFile::LoadFromFile(std::string filePath) {
 
 		ifs.read((char*)&StringSize, sizeof(StringSize));
 
-		Strings = new char[StringSize];
-		ifs.read(Strings, StringSize);
+		Strings = std::vector<char>(StringSize);
+		ifs.read((char*)&Strings[0], StringSize);
+
 
 		ifs.read((char*)&ModelHeader, sizeof(MdlStructs::ModelHeader));
 
@@ -144,14 +149,27 @@ void MdlFile::LoadFromFile(std::string filePath) {
 	ifs.close();
 }
 
-MdlFile* MdlFile::LoadFromFile2(std::string filePath)
-{
-	MdlFile* ret;
-	return nullptr;
+
+
+
+MdlFile* MdlFile::FromModel(Model* mdl) {
+	MdlFile* ret = new MdlFile();
+
+	return ret;
+}
+
+void MdlFile::WriteToFile(std::string outputPath) {
+	std::ofstream ofs;
+	try {
+
+	}
+	catch (int e) {
+
+	}
+	ofs.close();
 }
 
 MdlFile::~MdlFile() {
 	
-	delete[] Data;
-	delete[] Strings;
+	//delete[] Data;
 }

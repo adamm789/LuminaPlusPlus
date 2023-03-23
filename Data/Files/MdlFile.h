@@ -2,23 +2,27 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-
 #include <string>
+#include <memory>
+#include <cstddef>
 #include "../Parsing/MdlStructs.h"
 
+class Model;
 class MdlFile
 {
 public:
-	static MdlFile* LoadFromFile2(std::string filePath);
+	static MdlFile* FromModel(Model* mdl);
 	~MdlFile();
 	void LoadFromFile(std::string filePath);
+	void WriteToFile(std::string outputPath);
 
-	char* Data;
+	std::vector<std::byte> Data;
 
 	MdlStructs::ModelFileHeader FileHeader;
 	std::vector<MdlStructs::VertexDeclarationStruct> VertexDeclarations;
 	uint16_t StringCount;
-	char* Strings;
+	//char* Strings;
+	std::vector<char> Strings;
 
 	MdlStructs::ModelHeader ModelHeader;
 	std::vector<MdlStructs::ElementIdStruct> ElementIds;
