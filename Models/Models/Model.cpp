@@ -147,10 +147,6 @@ void Model::ReadShapes() {
 		uint16_t lowestIndex = UINT_MAX;
 		if (shapeStruct.ShapeMeshCount[(int)Lod] > 0) {
 			MdlStructs::ShapeMeshStruct shapeMeshStruct = File->ShapeMeshes[(int)shapeStruct.ShapeMeshStartIndex[(int)Lod]];
-			// startIndex in Indices
-			// in File->ShapeValues, start at ShapeMeshStruct::ShapeValueOffset and read ShapeMeshStruct::ShapeValueCount number of ShapeValues (?)
-			// which gives us a ShapeValueStruct
-			// ShapeValueStruct::Offset triangle index should now point to ShapeValueStruct::Value instead
 
 			for (int k = 0; k < shapeMeshStruct.ShapeValueCount; k++) {
 				MdlStructs::ShapeValueStruct svs = File->ShapeValues[k];

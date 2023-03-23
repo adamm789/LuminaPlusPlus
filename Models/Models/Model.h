@@ -27,6 +27,7 @@ public:
 	std::map<std::string, Shape> Shapes;
 	std::map<int, std::string> StringOffsetToStringMap;
 	int VariantId;
+
 private:
 	void BuildModel();
 	void ReadStrings();
