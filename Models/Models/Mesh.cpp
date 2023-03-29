@@ -44,10 +44,6 @@ void Mesh::ReadIndices() {
 	int count = currentMesh.IndexCount;
 
 	for (int i = 0; i < count; i++) {
-		//unsigned char byte1 = Parent->File->Data[offset + (i * 2)];
-		//unsigned char byte2 = Parent->File->Data[offset + (i * 2) + 1];
-
-		//unsigned short number = byte1 + (byte2 << 8);
 		uint16_t number;
 		memcpy(&number, &Parent->File->Data[offset + (i * 2)], sizeof(number));
 		Indices.push_back(number);
@@ -153,9 +149,6 @@ int Mesh::SetElementField(Vertex* v, MdlStructs::VertexElement element, std::vec
 		//Vector4
 		for (int i = 0; i < 4; i++) {
 			data[i] = (unsigned char)arr[offset + i];
-			if (data[i] > 3) {
-				int x = 0;
-			}
 		}
 		break;
 	case Vertex::VertexType::ByteFloat4:
@@ -251,28 +244,11 @@ int Mesh::SetElementField(Vertex* v, MdlStructs::VertexElement element, std::vec
 void Mesh::ReadSubmeshes() {
 	MdlStructs::MeshStruct currentMesh = Parent->File->Meshes[MeshIndex];
 
-	uint16_t indexStart = UINT_MAX;
-	uint16_t indexEnd = 0;
 	for (int i = 0; i < currentMesh.SubMeshCount; i++) {
 		Submesh s = Submesh(Parent, MeshIndex, i);
-		Submeshes.push_back(s);
-
-		if (s.IndexOffset < indexStart) {
-			indexStart = s.IndexOffset;
-		}
-		if (s.IndexNum + s.IndexOffset > indexEnd) {
-			indexEnd = s.IndexNum + s.IndexOffset;
-		}
 	}
 }
 
 void Mesh::AddShape(Shape s) {
 
-	bool added = false;
-	for (int i = 0; i < Submeshes.size(); i++) {
-		added = Submeshes[i].AddShape(s) || added;
-	}
-	if (added) {
-		Shapes.push_back(s);
-	}
 }
