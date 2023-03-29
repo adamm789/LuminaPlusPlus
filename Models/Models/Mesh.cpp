@@ -246,6 +246,7 @@ void Mesh::ReadSubmeshes() {
 
 	for (int i = 0; i < currentMesh.SubMeshCount; i++) {
 		Submesh s = Submesh(Parent, MeshIndex, i);
+		Submeshes.push_back(s);
 	}
 }
 
