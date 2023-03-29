@@ -136,10 +136,13 @@ std::vector<Mesh::MeshType> Model::GetMeshTypes(int index) {
 	return types;
 }
 
+
 void Model::ReadShapes() {
 	for (int i = 0; i < File->ModelHeader.ShapeCount; i++) {
 		std::string shapeName = StringOffsetToStringMap[File->Shapes[i].StringOffset];
 		Shape s = Shape(shapeName, File->Shapes[i].ShapeMeshStartIndex, File->Shapes[i].ShapeMeshCount);
+
+		std::vector<Submesh*> submeshes;
 
 		MdlStructs::ShapeStruct shapeStruct = File->Shapes[i];
 
@@ -154,19 +157,28 @@ void Model::ReadShapes() {
 				if (svs.Offset < lowestIndex) {
 					lowestIndex = svs.Offset;
 				}
+
+				for (int l = 0; l < Meshes.size(); l++) {
+					for (int m = 0; m < Meshes[l].Submeshes.size(); m++) {
+						Submesh* sm = &Meshes[l].Submeshes[m];
+
+						bool shouldSkip = false;
+						if (std::find(submeshes.begin(), submeshes.end(), sm) != submeshes.end()) {
+							shouldSkip = true;
+						}
+						if (shouldSkip) continue;
+
+						// if this shape has an index that is within the bounds of this submesh, add the shape to the submesh
+						if (sm->IndexOffset <= svs.Offset && (svs.Offset < sm->IndexOffset + sm->IndexNum)) {
+							sm->Shapes.push_back(s);
+							submeshes.push_back(sm);
+						}
+					}
+				}
 			}
 		}
 
 		s.ShapeValuesStartIndex = lowestIndex;
 		Shapes.emplace(shapeName, s);
 	}
-
-	std::map<std::string, Shape>::iterator it;
-	for (it = Shapes.begin(); it != Shapes.end(); it++) {
-		Shape s = it->second;
-		for (int i = 0; i < Meshes.size(); i++) {
-			Meshes[i].AddShape(s);
-		}
-	}
-	int x = 0;
 }
