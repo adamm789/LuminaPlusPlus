@@ -16,8 +16,8 @@ public:
 		High, Med, Low
 	};
 
-	Model(MdlFile* mdlFile, ModelLod lod = Model::ModelLod::High, int variantId = 1);
-	~Model();
+	__declspec(dllexport) Model(MdlFile* mdlFile, ModelLod lod = Model::ModelLod::High, int variantId = 1);
+	__declspec(dllexport) ~Model();
 
 	// TODO: Change to weak_ptr? shared_ptr?
 	MdlFile* File;
