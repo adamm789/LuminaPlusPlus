@@ -25,7 +25,9 @@ Submesh::Submesh(Model* model, int meshIndex, int subMeshIndex) {
 		boneEndIndex = model->File->SubmeshBoneMap.size();
 	}
 	for (int i = currentSubMesh->BoneStartIndex; i < boneEndIndex; i++) {
-		if (i > model->File->SubmeshBoneMap.size()) continue;
+		if (i > model->File->SubmeshBoneMap.size()) {
+			continue;
+		}
 
 		uint16_t boneIndex = model->File->SubmeshBoneMap[i];
 		/*
@@ -38,14 +40,4 @@ Submesh::Submesh(Model* model, int meshIndex, int subMeshIndex) {
 		std::string boneName = model->StringOffsetToStringMap[(int)boneOffset];
 		Bones.push_back(boneName);
 	}
-}
-
-
-bool Submesh::AddShape(Shape s) {
-	uint16_t startIndex = s.ShapeValuesStartIndex;
-	if (startIndex >= IndexOffset && startIndex < (IndexOffset + IndexNum)) {
-		Shapes.push_back(s);
-		return true;
-	}
-	return false;
 }
