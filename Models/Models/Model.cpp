@@ -2,6 +2,10 @@
 #include "../Materials/Material.h"
 #include <list>
 
+Model::Model() {
+
+}
+
 Model::Model(MdlFile* mdlFile, Model::ModelLod lod, int variantId) {
 	File = mdlFile;
 	Lod = lod;
@@ -140,7 +144,7 @@ std::vector<Mesh::MeshType> Model::GetMeshTypes(int index) {
 void Model::ReadShapes() {
 	for (int i = 0; i < File->ModelHeader.ShapeCount; i++) {
 		std::string shapeName = StringOffsetToStringMap[File->Shapes[i].StringOffset];
-		Shape s = Shape(shapeName, File->Shapes[i].ShapeMeshStartIndex, File->Shapes[i].ShapeMeshCount);
+		Shape* s = new Shape(shapeName, File->Shapes[i].ShapeMeshStartIndex, File->Shapes[i].ShapeMeshCount);
 
 		std::vector<Submesh*> submeshes;
 
@@ -150,10 +154,9 @@ void Model::ReadShapes() {
 		uint16_t lowestIndex = UINT_MAX;
 		if (shapeStruct.ShapeMeshCount[(int)Lod] > 0) {
 			MdlStructs::ShapeMeshStruct shapeMeshStruct = File->ShapeMeshes[(int)shapeStruct.ShapeMeshStartIndex[(int)Lod]];
-
 			for (int k = 0; k < shapeMeshStruct.ShapeValueCount; k++) {
 				MdlStructs::ShapeValueStruct svs = File->ShapeValues[k];
-				s.ShapeValueStructs.push_back(svs);
+				s->ShapeValueStructs.push_back(svs);
 				if (svs.Offset < lowestIndex) {
 					lowestIndex = svs.Offset;
 				}
@@ -178,7 +181,7 @@ void Model::ReadShapes() {
 			}
 		}
 
-		s.ShapeValuesStartIndex = lowestIndex;
+		s->ShapeValuesStartIndex = lowestIndex;
 		Shapes.emplace(shapeName, s);
 	}
 }
