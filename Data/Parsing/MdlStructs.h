@@ -21,12 +21,24 @@ public:
 	};
 
 	struct VertexElement {
-		uint8_t Stream;
-		uint8_t Offset;
-		uint8_t Type;
-		uint8_t Usage;
-		uint8_t UsageIndex;
-		uint8_t Padding[3];
+		uint8_t Stream = 0;
+		uint8_t Offset = 0;
+		uint8_t Type = 0;
+		uint8_t Usage = 0;
+		uint8_t UsageIndex = 0;
+		uint8_t Padding[3] = { 0,0,0 };
+
+		VertexElement() {
+
+		}
+
+		VertexElement(uint8_t s, uint8_t o, uint8_t t, uint8_t u, uint8_t ui) {
+			Stream = s;
+			Offset = o;
+			Type = t;
+			Usage = u;
+			UsageIndex = ui;
+		}
 	};
 
 	struct VertexDeclarationStruct {
