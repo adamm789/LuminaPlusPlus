@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Data\Files\MdlFile.cpp" />
     <ClCompile Include="Data\Files\MtrlFile.cpp" />
+    <ClCompile Include="Data\LuminaBinaryReader.cpp" />
     <ClCompile Include="Data\Parsing\MdlStructs.cpp" />
     <ClCompile Include="Data\Parsing\MtrlStructs.cpp" />
     <ClCompile Include="Models\Materials\Material.cpp" />
@@ -34,6 +35,7 @@
   <ItemGroup>
     <ClInclude Include="Data\Files\MdlFile.h" />
     <ClInclude Include="Data\Files\MtrlFile.h" />
+    <ClInclude Include="Data\LuminaBinaryReader.h" />
     <ClInclude Include="Data\Parsing\MdlStructs.h" />
     <ClInclude Include="Data\Parsing\MtrlStructs.h" />
     <ClInclude Include="Models\Materials\Material.h" />
@@ -67,7 +69,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -131,7 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>

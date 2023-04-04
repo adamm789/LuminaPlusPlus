@@ -54,6 +54,9 @@
     <ClCompile Include="Data\Parsing\MtrlStructs.cpp">
       <Filter>Data\Parsing</Filter>
     </ClCompile>
+    <ClCompile Include="Data\LuminaBinaryReader.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data\Files\MdlFile.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="Data\Parsing\MtrlStructs.h">
       <Filter>Data\Parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\LuminaBinaryReader.h">
+      <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -11,9 +11,12 @@ class Model;
 class MdlFile
 {
 public:
-	static MdlFile* FromModel(Model* mdl);
-	~MdlFile();
-	void LoadFromFile(std::string filePath);
+	__declspec(dllexport) static MdlFile* LoadFromFileStatic(const char* filePath);
+	static MdlFile* LoadFromData(std::vector<std::byte> data);
+
+
+	__declspec(dllexport) static MdlFile* FromModel(Model* mdl);
+	__declspec(dllexport) void LoadFromFile(const char* filePath);
 	void WriteToFile(std::string outputPath);
 
 	std::vector<std::byte> Data;
