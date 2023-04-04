@@ -16,6 +16,4 @@ public:
 	std::vector<std::string> Bones;
 
 	std::vector<Shape*> Shapes;
-	bool AddShape(Shape* s);
 };
-

@@ -40,7 +40,6 @@ public:
 
 	// TODO: Do meshes need to know which Shapes it contains?
 	std::vector<Shape> Shapes;
-	void AddShape(Shape s);
 
 private:
 	void BuildMesh();

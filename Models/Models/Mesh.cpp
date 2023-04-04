@@ -5,6 +5,12 @@
 #include <algorithm>
 #include <array>
 
+// https://github.com/NotAdam/Lumina/blob/master/src/Lumina/Models/Models/Mesh.cs
+
+Mesh::Mesh(int index) {
+	MeshIndex = index;
+}
+
 Mesh::Mesh(Model* parent, int index, std::vector<Mesh::MeshType> types)
 {
 	Parent = parent;
@@ -33,7 +39,7 @@ void Mesh::ReadBoneTable() {
 	MdlStructs::MeshStruct currentMesh = Parent->File->Meshes[MeshIndex];
 	int boneTableIndex = currentMesh.BoneTableIndex;
 	if (boneTableIndex != 255) {
-		BoneTable = Parent->File->BoneTables[boneTableIndex].BoneIndex;
+		memcpy(&BoneTable, &Parent->File->BoneTables[boneTableIndex].BoneIndex, 64);
 	}
 }
 
@@ -248,8 +254,4 @@ void Mesh::ReadSubmeshes() {
 		Submesh s = Submesh(Parent, MeshIndex, i);
 		Submeshes.push_back(s);
 	}
-}
-
-void Mesh::AddShape(Shape s) {
-
 }

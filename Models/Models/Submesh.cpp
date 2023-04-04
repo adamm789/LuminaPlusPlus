@@ -4,6 +4,11 @@
 #include "Mesh.h"
 
 //https://github.com/NotAdam/Lumina/blob/master/src/Lumina/Models/Models/Submesh.cs
+
+Submesh::Submesh()
+{
+}
+
 Submesh::Submesh(Model* model, int meshIndex, int subMeshIndex) {
 	MdlStructs::MeshStruct currentMesh = model->File->Meshes[meshIndex];
 	int subMeshListIndex = currentMesh.SubMeshIndex + subMeshIndex;
@@ -30,12 +35,6 @@ Submesh::Submesh(Model* model, int meshIndex, int subMeshIndex) {
 		}
 
 		uint16_t boneIndex = model->File->SubmeshBoneMap[i];
-		/*
-		if (boneIndex < 0 || boneIndex >= model->File->ModelHeader.BoneCount) {
-			// I don't know why, but it seems like we're trying to get boneIndices that are out of range?
-			continue;
-		}
-		*/
 		uint32_t boneOffset = model->File->BoneNameOffsets[boneIndex];
 		std::string boneName = model->StringOffsetToStringMap[(int)boneOffset];
 		Bones.push_back(boneName);

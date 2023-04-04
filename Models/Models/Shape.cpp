@@ -2,8 +2,8 @@
 
 Shape::Shape(std::string shapeName, uint16_t startIndex[3], uint16_t meshCount[3]) {
 	ShapeName = shapeName;
-	//ShapeMeshStartIndex = *startIndex;
-	memcpy(&ShapeMeshStartIndex, &startIndex, 3);
-	//ShapeMeshCount = meshCount;
-	memcpy(&ShapeMeshCount, &meshCount, 3);
+	for (int i = 0; i < 3; i++) {
+		ShapeMeshStartIndex[i] = startIndex[i];
+		ShapeMeshCount[i] = meshCount[i];
+	}
 }
