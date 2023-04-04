@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+
+// https://github.com/NotAdam/Lumina/blob/master/src/Lumina/Models/Models/Vertex.cs
 class Vertex
 {
 public:

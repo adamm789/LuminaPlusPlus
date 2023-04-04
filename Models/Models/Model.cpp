@@ -2,6 +2,8 @@
 #include "../Materials/Material.h"
 #include <list>
 
+// https://github.com/NotAdam/Lumina/blob/master/src/Lumina/Models/Models/Model.cs
+
 Model::Model() {
 
 }

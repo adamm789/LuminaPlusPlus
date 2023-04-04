@@ -1,5 +1,7 @@
 #pragma once
 #include <cstdint>
+
+// https://github.com/NotAdam/Lumina/blob/master/src/Lumina/Data/Parsing/MtrlStructs.cs
 static class MtrlStructs
 {
 public:
