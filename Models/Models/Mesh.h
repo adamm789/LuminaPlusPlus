@@ -24,19 +24,21 @@ public:
 		CrestChange
 	};
 
-	Mesh(Model* parent, int index, std::vector<Mesh::MeshType> types);
-	~Mesh();
+	__declspec(dllexport) Mesh(int index);
+	__declspec(dllexport) Mesh(Model* parent, int index, std::vector<Mesh::MeshType> types);
+	__declspec(dllexport) ~Mesh();
 
-	Model* Parent;
-	int MeshIndex;
+	Model* Parent = nullptr;
+	int MeshIndex = 0;
 	std::vector<Mesh::MeshType> Types;
 	std::vector<std::string> Attributes;
 	std::vector<Submesh> Submeshes;
-	uint16_t* BoneTable;
+	uint16_t BoneTable[64];
 	std::vector<Vertex> Vertices;
 	std::vector<uint16_t> Indices;
-	Material* Material;
+	Material* Material = nullptr;
 
+	// TODO: Do meshes need to know which Shapes it contains?
 	std::vector<Shape> Shapes;
 	void AddShape(Shape s);
 

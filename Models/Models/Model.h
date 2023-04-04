@@ -16,6 +16,7 @@ public:
 		High, Med, Low
 	};
 
+	__declspec(dllexport) Model();
 	__declspec(dllexport) Model(MdlFile* mdlFile, ModelLod lod = Model::ModelLod::High, int variantId = 1);
 	__declspec(dllexport) ~Model();
 
@@ -24,7 +25,7 @@ public:
 	ModelLod Lod;
 	std::vector<Mesh> Meshes;
 	std::vector<Material> Materials;
-	std::map<std::string, Shape> Shapes;
+	std::map<std::string, Shape*> Shapes;
 	std::map<int, std::string> StringOffsetToStringMap;
 	int VariantId;
 
