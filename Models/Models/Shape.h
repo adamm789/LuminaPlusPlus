@@ -16,6 +16,6 @@ public:
 
 	uint16_t ShapeValuesStartIndex = 0;
 
-	Shape(std::string shapeName, uint16_t startIndex[3], uint16_t meshCount[3]);
+	__declspec(dllexport) Shape(std::string shapeName, uint16_t startIndex[3], uint16_t meshCount[3]);
 };
 
